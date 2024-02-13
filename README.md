@@ -89,6 +89,11 @@ Clone this repository to your desired folder:
 - Twitter: [@briton_otieno4](https://twitter.com/briton_otieno4)
 - LinkedIn: [briton-otieno](https://linkedin.com/in/briton-otieno)
 
+👤 **Molnar Emese**
+  - GitHub: [@Mesi21](https://github.com/Mesi21)
+  - Twitter: [@buksimesi21](https://twitter.com/buksimesi21)  
+  - LinkedIn: [LinkedIn] (https://www.linkedin.com/in/emesemesimolnar/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
