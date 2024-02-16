@@ -49,3 +49,22 @@ body {
 #food-lst-header {
   justify-content: space-evenly;
 }
+
+#new-food-form {
+  width: 60%;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #b6b5b4;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+#add-food-btn {
+  width: 100%;
+  margin-top: 50px;
+}
