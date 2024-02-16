@@ -36,6 +36,11 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to users_url, notice: 'User was successfully destroyed.'
   end
+  
+  def sign_out_user
+    sign_out(current_user)
+    redirect_to root_path, notice: 'Signed out successfully'
+  end
 
   private
 
