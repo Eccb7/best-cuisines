@@ -9,9 +9,7 @@ class RecipeFoodsController < ApplicationController
   def create
     @recipe_food = @recipe.recipe_foods.build(recipe_food_params)
     if @recipe_food.save
-      respond_to do |format|
-        format.turbo_stream
-      end
+      respond_to(&:turbo_stream)
     else
       render :new
     end
@@ -24,6 +22,6 @@ class RecipeFoodsController < ApplicationController
   end
 
   def recipe_food_params
-    params.require(:recipe_food).permit(:quantity, food_attributes: [:name, :quantity, :price])
+    params.require(:recipe_food).permit(:quantity, food_attributes: %i[name quantity price])
   end
 end

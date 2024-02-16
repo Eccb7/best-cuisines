@@ -15,7 +15,7 @@ class FoodsController < ApplicationController
     if @food.save
       redirect_to foods_path, notice: 'Food added successfully.'
     else
-      puts 'Failed to save food.' 
+      puts 'Failed to save food.'
       render :new
     end
   end
