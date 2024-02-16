@@ -31,7 +31,10 @@ class RecipesController < ApplicationController
     if @recipe.save
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.append('recipes', partial: 'recipe', locals: { recipe: @recipe, current_user_owns_recipe: method(:current_user_owns_recipe?) })
+          render turbo_stream: turbo_stream.append('recipes', partial: 'recipe',
+                                                              locals: { recipe: @recipe,
+                                                                        current_user_owns_recipe:
+                                                              method(:current_user_owns_recipe?) })
         end
       end
     else
