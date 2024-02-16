@@ -1,11 +1,8 @@
 class FoodsController < ApplicationController
-  before_action :set_food, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
-    @foods = Food.all
-  end
-
-  def show
+    @foods = current_user.foods
   end
 
   def new
@@ -13,38 +10,20 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @food = Food.new(food_params)
+    @food = current_user.foods.build(food_params)
 
     if @food.save
-      redirect_to @food, notice: 'Food was successfully created.'
+      puts 'Food added successfully.' # Check your console for this message
+      redirect_to foods_path, notice: 'Food added successfully.'
     else
+      puts 'Failed to save food.' # Check your console for this message
       render :new
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @food.update(food_params)
-      redirect_to @food, notice: 'Food was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @food.destroy
-    redirect_to foods_url, notice: 'Food was successfully destroyed.'
-  end
-
   private
 
-  def set_food
-    @food = Food.find(params[:id])
-  end
-
   def food_params
-    params.require(:food).permit(:name, :measurement_unit, :price, :quantity, :user_id)
+    params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
   end
 end
