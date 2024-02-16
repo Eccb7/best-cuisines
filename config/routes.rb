@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   root "recipes#public_recipes"
 
-  resources :foods, only: [:index, :create, :destroy]
+  resources :foods, only: [:index, :create, :new, :destroy]
 
   resources :recipes do
     member do

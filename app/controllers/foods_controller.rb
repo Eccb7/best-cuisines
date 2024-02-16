@@ -13,10 +13,9 @@ class FoodsController < ApplicationController
     @food = current_user.foods.build(food_params)
 
     if @food.save
-      puts 'Food added successfully.' # Check your console for this message
       redirect_to foods_path, notice: 'Food added successfully.'
     else
-      puts 'Failed to save food.' # Check your console for this message
+      puts 'Failed to save food.' 
       render :new
     end
   end
