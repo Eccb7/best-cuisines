@@ -1,10 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Your Recipes</h1>
-
-<%= link_to "New Recipe", new_recipe_path, class: "btn btn-primary" %>
-
-<div id="recipes">
+<div class="d-flex flex-row" id="recipe-idx">
+  <h1>Your Recipes</h1>
+  <%= link_to "New Recipe", new_recipe_path, class: "btn btn-success" %>
+</div>
+<div class="container" id="recipes">
   <% @recipes.each do |recipe| %>
     <%= render 'recipe', recipe: recipe %>
   <% end %>

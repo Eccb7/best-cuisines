@@ -29,3 +29,23 @@ body {
 #public_card h1{
   text-align: center;
 }
+
+#recipe-idx {
+  justify-content: space-evenly;
+  margin: 20px auto;
+  width: 80%;
+}
+
+#recipes a{
+  text-decoration: none;
+}
+
+#add-food-item {
+  margin: 20px auto;
+  width: 100%;
+  text-align: center;
+}
+
+#food-lst-header {
+  justify-content: space-evenly;
+}
