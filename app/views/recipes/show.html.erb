@@ -1,0 +1,22 @@
+<h1><%= @recipe.name %></h1>
+
+<div class="form-check form-switch form-check-reverse">
+  <%= check_box_tag 'public', '1', @recipe.public, class: 'form-check-input', id: 'toggle-public' %>
+  <%= label_tag 'toggle-public', 'Toggle Public', class: 'form-check-label' %>
+</div>
+
+<p>Preparation Time: <%= @recipe.preparation_time %></p>
+<p>Cooking Time: <%= @recipe.cooking_time %></p>
+<p><%= @recipe.description %></p>
+
+<div class="d-flex justify-content-between">
+  <%= button_to "Generate Shopping List", method: :post, class: 'btn btn-success' %>
+<%= button_to 'Add Ingredients', new_recipe_recipe_food_path(@recipe), method: :get, class: 'btn btn-primary' %>
+</div>
+
+<div>
+  <h2>Added Foods:</h2>
+  <% @recipe.recipe_foods.each do |recipe_food| %>
+    <p><%= recipe_food.food.name %> - Quantity: <%= recipe_food.quantity %></p>
+  <% end %>
+</div>

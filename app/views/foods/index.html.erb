@@ -1,0 +1,7 @@
+<h1>Your Food List</h1>
+
+<% @foods.each do |food| %>
+  <p><%= food.name %> - Quantity: <%= food.quantity %></p>
+<% end %>
+
+<%= link_to 'Add New Food', new_food_path, class: 'btn btn-primary' %>
