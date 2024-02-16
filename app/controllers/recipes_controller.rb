@@ -33,7 +33,7 @@ class RecipesController < ApplicationController
           render turbo_stream: turbo_stream.append('recipes', partial: 'recipe',
                                                               locals: { recipe: @recipe,
                                                                         current_user_owns_recipe:
-                                                                        method(:current_user_owns_recipe?) })
+                                                              method(:current_user_owns_recipe?) })
         end
       end
     else
