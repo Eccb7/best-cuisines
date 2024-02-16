@@ -9,7 +9,6 @@ class RecipesController < ApplicationController
     @public_recipes = Recipe.public_recipes.order(created_at: :desc)
     @recipes = (@user_recipes + @public_recipes).uniq
 
-    # Set a variable indicating whether the recipe is owned by the current user
     @owned_recipes = @recipes.select { |recipe| current_user_owns_recipe?(recipe) }
   end
 
