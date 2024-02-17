@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
+  get '/sign_out_user', to: 'users#sign_out_user', as: 'sign_out_user'
   devise_for :users
+    resources :users do
+      member do
+        delete 'sign_out_user', to: 'users#sign_out_user', as: :sign_out_user
+      end
+    end
 
   get "up" => "rails/health#show", as: :rails_health_check
   root "recipes#public_recipes"

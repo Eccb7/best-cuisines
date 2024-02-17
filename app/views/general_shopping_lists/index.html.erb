@@ -1,0 +1,27 @@
+<div class="shopping-list-container">
+  <h1>Shopping List</h1>
+
+  <div class="total-foods-value">
+    <p>Total Foods to Buy: <%= @recipe_foods.size %> items</p>
+    <p>Total Value: $<%= @recipe_foods.sum { |rf| rf.total_value.to_i } %></p>
+  </div>
+
+  <table class="table" id="ShoppingListTable">
+    <thead>
+      <tr class="tableheader">
+        <th class="tablecol sortable">Foods</th>
+        <th class="tablecol sortable">Total Quantity</th>
+        <th class="tablecol sortable">Total Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recipe_foods.each do |recipe_food| %>
+        <tr class="tableheader">
+          <td class="tablecol"><%= recipe_food.name %></td>
+          <td class="tablecol"><%= recipe_food.total_quantity %></td>
+          <td class="tablecol"><%= recipe_food.total_value %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

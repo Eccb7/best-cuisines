@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0 auto;
+  background-color: #918868;
+}
+
+#navbar {
+  width: 100%;
+}
+
+.navbar-nav {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#public_card {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#public_card h1 {
+  text-align: center;
+}
+
+#recipe-idx {
+  justify-content: space-evenly;
+  margin: 20px auto;
+  width: 80%;
+}
+
+#recipes a {
+  text-decoration: none;
+}
+
+#add-food-item {
+  margin: 20px auto;
+  width: 100%;
+  text-align: center;
+}
+
+#food-lst-header {
+  justify-content: space-evenly;
+}
+
+#new-food-form {
+  width: 60%;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #b6b5b4;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+#add-food-btn {
+  width: 100%;
+  margin-top: 50px;
+}

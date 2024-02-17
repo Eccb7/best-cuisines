@@ -1,26 +1,25 @@
-<div class="bg-white p-6 rounded-lg shadow-md mt-4">
-  <h1 class="text-3xl font-semibold mb-5 flex justify-center">Add Food</h1>
-
+<div class="container-fluid" id="new-food-form">
+  <h1>Add new food</h1>
   <%= form_with model: @food, url: foods_path, class: "mt-5" do |form| %>
     <div class="space-y-4">
-      <div class="flex flex-col">
+      <div class="fields">
         <%= form.label :name, class: "text-lg font-medium text-gray-600 mb-2" %>
           <%= form.text_field :name, class: "w-full p-3 rounded-lg border border-gray-300" %>
       </div>
-      <div class="flex flex-col">
+      <div class="fields">
         <%= form.label :measurement_unit, class: "text-lg font-medium text-gray-600 mb-2" %>
           <%= form.text_field :measurement_unit, class: "w-full p-3 rounded-lg border border-gray-300" %>
       </div>
-      <div class="flex flex-col">
+      <div class="fields">
         <%= form.label :price, class: "text-lg font-medium text-gray-600 mb-2" %>
           <%= form.text_field :price, class: "w-full p-3 rounded-lg border border-gray-300" %>
       </div>
-      <div class="flex flex-col">
+      <div class="fields">
         <%= form.label :quantity, class: "text-lg font-medium text-gray-600 mb-2" %>
           <%= form.text_field :quantity, class: "w-full p-3 rounded-lg border border-gray-300" %>
       </div>
       <%= form.submit "Add Food" ,
-        class: "mt-5 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg" %>
+        class: "btn btn-success", id: "add-food-btn" %>
     </div>
-    <% end %>
+  <% end %>
 </div>

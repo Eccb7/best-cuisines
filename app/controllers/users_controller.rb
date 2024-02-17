@@ -6,7 +6,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @recipes = @user.recipes
+    if @user
+      @recipes = @user.recipes
+    else
+      # Handle the case where params[:id] is "sign_out"
+      redirect_to root_path, notice: 'User not found'
+    end
   end
 
   def new
@@ -37,10 +42,19 @@ class UsersController < ApplicationController
     redirect_to users_url, notice: 'User was successfully destroyed.'
   end
 
+  def sign_out_user
+    if params[:id] == 'sign_out'
+      # Handle sign out without fetching a user from the database
+    else
+      sign_out(current_user)
+    end
+    redirect_to root_path, notice: 'Signed out successfully'
+  end
+
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = params[:id] == 'sign_out' ? nil : User.find(params[:id])
   end
 
   def user_params
