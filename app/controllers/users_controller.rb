@@ -45,11 +45,10 @@ class UsersController < ApplicationController
   def sign_out_user
     if params[:id] == 'sign_out'
       # Handle sign out without fetching a user from the database
-      redirect_to root_path, notice: 'Signed out successfully'
     else
       sign_out(current_user)
-      redirect_to root_path, notice: 'Signed out successfully'
     end
+    redirect_to root_path, notice: 'Signed out successfully'
   end
 
   private
