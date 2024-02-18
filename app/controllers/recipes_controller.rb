@@ -34,9 +34,9 @@ class RecipesController < ApplicationController
         format.html { redirect_to recipes_path, notice: 'Recipe was successfully created.' }
         format.turbo_stream do
           render turbo_stream: turbo_stream.append('recipes', partial: 'recipe', locals: {
-            recipe: @recipe,
-            current_user_owns_recipe: method(:current_user_owns_recipe?)
-          })
+                                                     recipe: @recipe,
+                                                     current_user_owns_recipe: method(:current_user_owns_recipe?)
+                                                   })
         end
       end
     else
@@ -79,7 +79,7 @@ class RecipesController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.prepend('recipe_foods', partial: 'recipe_foods/recipe_food',
-                                                                      locals: { recipe_food: @recipe_food })
+                                                                    locals: { recipe_food: @recipe_food })
         end
       end
     else
@@ -89,9 +89,7 @@ class RecipesController < ApplicationController
 
   def generate_shopping_list
     @recipe_foods_grouped = @recipe.recipe_foods.group_by { |rf| rf.food.name }
-    respond_to do |format|
-      format.turbo_stream
-    end
+    respond_to(&:turbo_stream)
   end
 
   private
@@ -113,8 +111,8 @@ class RecipesController < ApplicationController
   end
 
   def check_one_recipe_per_user
-    if current_user.recipe.present?
-      redirect_to current_user.recipe, alert: 'You already have a recipe. Edit it instead.'
-    end
+    return unless current_user.recipe.present?
+
+    redirect_to current_user.recipe, alert: 'You already have a recipe. Edit it instead.'
   end
 end

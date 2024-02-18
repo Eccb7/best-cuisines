@@ -24,6 +24,6 @@ class RecipeFoodsController < ApplicationController
   end
 
   def recipe_food_params
-    params.require(:recipe_food).permit(food_attributes: [:name, :quantity, :price])
+    params.require(:recipe_food).permit(food_attributes: %i[name quantity price])
   end
 end
