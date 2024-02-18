@@ -1,0 +1,40 @@
+<section class="foods bg-gradient">
+  <div class="container">
+    <div class="row add-food-item-action">
+      <div class="col-lg-6 col-md-8" id="add-food-item">
+        <div class="section-title d-flex flex-row title-ex1" id="food-lst-header">
+          <h1>Your Food List</h1>
+          <%= link_to 'Add New Food Item', new_food_path, class:'btn btn-success'%>
+        </div>
+      </div>
+    </div>
+		<div class="row">
+      <turbo-frame id="food-items-table-frame">
+          <table class="table" id="FoodItemsTable">
+              <thead>
+                  <tr class="tableheader">
+                  <th class="tablecol sortable">Food Name</th>
+                  <th class="tablecol sortable">Measurement Unit</th>
+                  <th class="tablecol sortable">Price per Unit</th>
+                  <th class="tablecol sortable">Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% @foods.each do |food| %>
+                      <tr class="tableheader">
+                          <td class="tablecol"><%= food.name %></td>
+                          <td class="tablecol">
+                              <%= food.measurement_unit %>
+                          </td>
+                          <td class="tablecol">$<%= food.price %></td>
+                          <td class="tablecol">
+                              <%= button_to 'Delete', food_path(food), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+                          </td>
+                      </tr>
+                  <% end %>
+              </tbody>
+          </table>
+      </turbo-frame>
+		</div>    
+	</div>
+</section>
