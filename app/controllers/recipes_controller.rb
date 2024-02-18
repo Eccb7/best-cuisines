@@ -2,7 +2,8 @@ class RecipesController < ApplicationController
   include RecipesHelper
 
   before_action :authenticate_user!
-  before_action :set_recipe, only: %i[show destroy toggle_public add_food create_food]
+  before_action :set_recipe, only: %i[show destroy toggle_public add_food create_food generate_shopping_list]
+  before_action :check_one_recipe_per_user, only: [:new]
 
   def index
     @user_recipes = current_user.recipes
@@ -15,6 +16,7 @@ class RecipesController < ApplicationController
   def show
     if @recipe.visible_to?(current_user) || current_user_owns_recipe?(@recipe)
       @recipe_foods = @recipe.recipe_foods.includes(:food)
+      @new_recipe_food = RecipeFood.new(recipe: @recipe, food: Food.new)
     else
       redirect_to root_path, alert: 'Access denied.'
     end
@@ -29,11 +31,12 @@ class RecipesController < ApplicationController
 
     if @recipe.save
       respond_to do |format|
+        format.html { redirect_to recipes_path, notice: 'Recipe was successfully created.' }
         format.turbo_stream do
-          render turbo_stream: turbo_stream.append('recipes', partial: 'recipe',
-                                                              locals: { recipe: @recipe,
-                                                                        current_user_owns_recipe:
-                                                              method(:current_user_owns_recipe?) })
+          render turbo_stream: turbo_stream.append('recipes', partial: 'recipe', locals: {
+            recipe: @recipe,
+            current_user_owns_recipe: method(:current_user_owns_recipe?)
+          })
         end
       end
     else
@@ -72,10 +75,22 @@ class RecipesController < ApplicationController
     @food.user = current_user
 
     if @food.save
-      @recipe.foods << @food
-      redirect_to @recipe, notice: 'Food added successfully.'
+      @recipe_food = RecipeFood.create(recipe: @recipe, food: @food, quantity: @food.quantity)
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.prepend('recipe_foods', partial: 'recipe_foods/recipe_food',
+                                                                      locals: { recipe_food: @recipe_food })
+        end
+      end
     else
       render :add_food
+    end
+  end
+
+  def generate_shopping_list
+    @recipe_foods_grouped = @recipe.recipe_foods.group_by { |rf| rf.food.name }
+    respond_to do |format|
+      format.turbo_stream
     end
   end
 
@@ -95,5 +110,11 @@ class RecipesController < ApplicationController
 
   def current_user_owns_recipe?(recipe)
     recipe.user == current_user
+  end
+
+  def check_one_recipe_per_user
+    if current_user.recipe.present?
+      redirect_to current_user.recipe, alert: 'You already have a recipe. Edit it instead.'
+    end
   end
 end
