@@ -19,9 +19,11 @@ class RecipeFoodsController < ApplicationController
 
   def set_recipe
     @recipe = Recipe.find(params[:recipe_id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: 'Recipe not found.'
   end
 
   def recipe_food_params
-    params.require(:recipe_food).permit(:quantity, food_attributes: %i[name quantity price])
+    params.require(:recipe_food).permit(food_attributes: [:name, :quantity, :price])
   end
 end
