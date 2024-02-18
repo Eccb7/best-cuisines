@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :recipes do
     member do
       post 'toggle_public'
+      post 'generate_shopping_list'
     end
 
     resources :recipe_foods, only: [:new, :create, :edit, :update, :destroy]
